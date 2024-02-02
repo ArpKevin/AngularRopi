@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8">
+  <title>Automatikusan generált legördülő lista</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+  <!-- <script src="js/app.js"></script>
+  <script src="js/maincontroller.js"></script> -->
+</head>
+<body>
+<!--1) Add hozzá a bodyhoz az app 
+   2)  és a controller direktívákat!-->
+
+    <div ng-controller="MainController" ng-app="AngularStart">
+        <h2>{{szoveg}}</h2>
+
+        <!-- 3.) Hozz létre legördülő menüt! -->
+        <b>Könyv címe:</b>
+
+        <select ng-model="valasztottKonyv" ng-options="konyv.cim for konyv in konyvek" onchange="$('#tehat').show()"></select>
+        &nbsp;&nbsp;
+
+        <!--4) nyelv beolvasása választó menübe-->
+
+        <b>nyelvek:</b>
+        <select ng-model="valasztottNyelv">
+            <option ng-repeat="ny in valasztottKonyv.nyelv">{{ny}}</option>
+        </select>
+        
+        <!-- 5) Szerző és kiadás évének megjelenítése, 
+            6) add hozzá a p taghez a szükséges direktívát! -->
+        <p>
+          <b>Szerző:</b> Jelenítsd meg itt a szerzőt!<br>
+          <b>Kiadás éve:</b> jelenítsd meg itt a kiadás évét!<br>
+        </p>
+
+        <p ng-model="valasztottKonyv" id="tehat" style="display: none;">
+            A könyv szerzője: {{valasztottKonyv.szerzo}}, kiadás éve: {{valasztottKonyv.kiadasEve}}
+        </p>
+
+
+    </div>
+
+
+
+<script>
+// 7) Hozz létre egy AngularJS alkalmazást!
+
+var app = angular.module("AngularStart", []);
+
+ 
+// 8.) Hozz létre egy AngularJS kontrollert!
+
+app.controller('MainController', function($scope){
+    $scope.konyvek = konyvek;
+
+    $scope.szoveg = "Automatikusan generált legördülő lista";
+    });
+
+
+    // 10) Olvasd be a feladatba a következő tömböt:
+konyvek = [
+        {
+            cim: "A Gyűrűk Ura",
+            szerzo: "J.R.R. Tolkien",
+            kiadasEve: 1954,
+            nyelv: ["magyar", "angol"]
+        },
+        {
+            cim: "A Szél nevében",
+            szerzo: "Khaled Hosseini",
+            kiadasEve: 2003,
+            nyelv: ["magyar", "angol", "perzsa"]
+        },
+        {
+            cim: "Harry Potter és a bölcsek köve",
+            szerzo: "J.K. Rowling",
+            kiadasEve: 1997,
+            nyelv: ["magyar", "angol"]
+        },
+        {
+            cim: "Az idő rövid története",
+            szerzo: "Stephen Hawking",
+            kiadasEve: 1988,
+            nyelv: ["magyar", "angol"]
+        }
+    ];
+
+    /*10) a 11 sor tartalmát tárold el egy Angular változóba 
+    és úgy jelenítsd meg a böngészőbe, hogy a változó nevét adod meg*/ 
+
+</script>
+
+</body>
+</html>
